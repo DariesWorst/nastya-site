@@ -4,13 +4,10 @@
 <meta charset="UTF-8">
 <title>НАСТЯ | XO Game</title>
 <link rel="stylesheet" href="style.css">
-
-<!-- 🎉 confetti -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-<div id="menu" class="screen active fade">
+<div id="menu" class="screen active">
     <div class="title">Добро пожаловать в игру НАСТЯ 🎮</div>
 
     <button onclick="startGame('bot')">Играть с ботом 🤖</button>
@@ -19,13 +16,10 @@
 
 <div id="game" class="screen">
     <div class="title" id="modeTitle"></div>
-
     <div class="board" id="board"></div>
 
-    <div class="controls">
-        <button onclick="resetGame()">Заново 🔄</button>
-        <button onclick="backMenu()">Назад ⬅️</button>
-    </div>
+    <button onclick="resetGame()">Заново 🔄</button>
+    <button onclick="backMenu()">Назад ⬅️</button>
 </div>
 
 <script src="script.js"></script>
