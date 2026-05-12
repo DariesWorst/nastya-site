@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 120px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    color: black;
+    opacity: 0;
+    transform: scale(0.3);
+    text-shadow: 0 0 0px white;
+    transition: all 2s ease;
+}
+
+/* класс появления */
+.show {
+    opacity: 1;
+    transform: scale(1);
+    color: black;
+    text-shadow: 0 0 25px white, 0 0 50px gray;
+}
