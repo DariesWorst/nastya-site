@@ -2,12 +2,28 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>NASTYA</title>
+<title>НАСТЯ | XO Game</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1 id="name">НАСТЯ</h1>
+<div id="menu" class="screen active fade">
+    <div class="title">Добро пожаловать в игру НАСТЯ 🎮</div>
+
+    <button onclick="startGame('bot')">Играть с ботом 🤖</button>
+    <button onclick="startGame('2p')">2 игрока 👥</button>
+</div>
+
+<div id="game" class="screen">
+    <div class="title" id="modeTitle"></div>
+
+    <div class="board" id="board"></div>
+
+    <div class="controls">
+        <button onclick="resetGame()">Заново 🔄</button>
+        <button onclick="backMenu()">Назад ⬅️</button>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
