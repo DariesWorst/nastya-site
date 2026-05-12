@@ -2,6 +2,25 @@ let board = Array(9).fill(null);
 let current = "X";
 let mode = "2p";
 
+/* 🎉 CONFETTI */
+function fireConfetti() {
+    const duration = 2000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 6,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
+}
+
+/* 🎮 START */
 function startGame(m) {
     mode = m;
 
@@ -29,6 +48,7 @@ function resetBoard() {
     draw();
 }
 
+/* 🎨 DRAW */
 function draw() {
     const boardDiv = document.getElementById("board");
     boardDiv.innerHTML = "";
@@ -47,6 +67,7 @@ function draw() {
     });
 }
 
+/* 🎮 MOVE */
 function move(i) {
     if (board[i]) return;
 
@@ -54,6 +75,7 @@ function move(i) {
     draw();
 
     if (checkWin(current)) {
+        fireConfetti();
         setTimeout(() => alert(current + " победил 🎉"), 100);
         return;
     }
@@ -65,7 +87,7 @@ function move(i) {
     }
 }
 
-/* 🤖 УМНЫЙ БОТ */
+/* 🤖 SMART BOT */
 function botMove() {
     let move = findBestMove();
 
@@ -73,6 +95,7 @@ function botMove() {
     draw();
 
     if (checkWin("O")) {
+        fireConfetti();
         setTimeout(() => alert("Бот победил 🤖"), 100);
         return;
     }
@@ -80,44 +103,35 @@ function botMove() {
     current = "X";
 }
 
+/* 🧠 AI */
 function findBestMove() {
 
-    // выиграть
     for (let i = 0; i < 9; i++) {
         if (!board[i]) {
             board[i] = "O";
-            if (checkWin("O")) {
-                board[i] = null;
-                return i;
-            }
+            if (checkWin("O")) { board[i] = null; return i; }
             board[i] = null;
         }
     }
 
-    // блок игрока
     for (let i = 0; i < 9; i++) {
         if (!board[i]) {
             board[i] = "X";
-            if (checkWin("X")) {
-                board[i] = null;
-                return i;
-            }
+            if (checkWin("X")) { board[i] = null; return i; }
             board[i] = null;
         }
     }
 
-    // центр
     if (!board[4]) return 4;
 
-    // углы
     let corners = [0,2,6,8].filter(i => !board[i]);
     if (corners.length) return corners[Math.floor(Math.random() * corners.length)];
 
-    // всё остальное
     let empty = board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
     return empty[Math.floor(Math.random() * empty.length)];
 }
 
+/* 🏆 WIN */
 function checkWin(p) {
     const win = [
         [0,1,2],[3,4,5],[6,7,8],
